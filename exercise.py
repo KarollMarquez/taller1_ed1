@@ -1,5 +1,5 @@
 test_file = 'exercise.csv'
-print("Elija que ejercicio desea ejecutar 1-3")
+print("Elija que ejercicio desea ejecutar 1-4")
 n = input()
 data = [{'cedula': '12345', 'nombre': 'Jose', 'saldo': "50.43"},
         {'cedula': '54321', 'nombre': 'Dario', 'saldo': "43.12"}]
@@ -28,6 +28,21 @@ def contar():
 
     print(str(x) + ' clientes tienen saldo mayor a $50')
 
+
+def ordenar():
+    with open(test_file, 'r') as file:
+        data = {}
+        for line in file:
+            i = line.split(',')
+            if(i[0] != 'Cedula'):
+                data.update({i[1]: i[2][:-1]})
+        keys = list(data.keys())
+        keys.sort()
+        data = {i: data[i] for i in keys}
+        keys = list(data.keys())
+        for i in range(len(data)):
+            print(keys[i] + ' - '+ data[keys[i]])
+
 def switch(n):
     if(n == '1'): 
         guardar_datos()
@@ -35,6 +50,8 @@ def switch(n):
         consultar_saldo()
     elif(n == '3'):
         contar()
+    elif(n == '4'):
+        ordenar()
     else:
         return "Invalid input"
 
